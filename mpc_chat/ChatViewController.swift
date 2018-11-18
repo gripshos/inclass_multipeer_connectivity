@@ -133,7 +133,10 @@ extension ChatViewController: UITextFieldDelegate {
             //ToDo: This is how you send a meesage. This is a hint for sending the newRoom name to the user. What if you send a similar message with kBrowserPeerRoomName in the key and the value of the newRoomName?
             let messageDictionary: [String: String] = [
                 kCommunicationsMessageContentTerm: textField.text!,
-                kCommunicationsMessageUUIDTerm: message.uuid
+                kCommunicationsMessageUUIDTerm: message.uuid,
+                
+                //This is where I will be working with changing the peer room name. I am not sure what to fill in here.
+                kBrowserPeerRoomName: "I am not sure exactly how to do this"
             ]
             
             messagesToDisplay.append(message)
@@ -190,6 +193,7 @@ extension ChatViewController: MPCManagerMessageDelegate {
                 
                 OperationQueue.main.addOperation({ () -> Void in
                     self.present(alert, animated: true, completion: nil)
+                    
                 })
             }
             

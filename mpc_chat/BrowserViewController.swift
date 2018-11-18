@@ -119,11 +119,15 @@ class BrowserViewController: UIViewController {
                 }
             }
             
-            let roomName = "Chat w/ \(peerDisplayName)" //Probably want to come up with better default room name
+            let roomName = "Homework 4" //Probably want to come up with better default room name
             
             let actionSheet = UIAlertController(title: "", message: "Connect to \(peerDisplayName)", preferredStyle: UIAlertController.Style.actionSheet)
+   
             
             let actionNewRoomTitle = "Create New \(roomName)"
+            let actionChangeRoomTitle = "Change room name"
+                
+            
             let createNewRoomAction: UIAlertAction = UIAlertAction(title: actionNewRoomTitle, style: UIAlertAction.Style.default) { (alertAction) -> Void in
                 
                 self.model.createNewChatRoom(self.appDelagate.peerUUID, peerToJoinUUID: peerUUID, roomName: roomName, completion: {
@@ -149,11 +153,22 @@ class BrowserViewController: UIViewController {
                 })
             }
             
+            //This is where I will allow the user to create a new room name
+            let changeRoomName:UIAlertAction = UIAlertAction(title: actionChangeRoomTitle, style: UIAlertAction.Style.default) { (alertAction) -> Void in
+                
+                //This is where I am going to try to implement the new room name function, taken from the
+                //below function of creating a new room action button.
+                
+                
+                
+            }
+            
             let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel) { (alertAction) -> Void in
                 
             }
             
             actionSheet.addAction(createNewRoomAction)
+            actionSheet.addAction(changeRoomName)
             //Add all old actions before cancel
             for action in oldRoomActions{
                 actionSheet.addAction(action)

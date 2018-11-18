@@ -194,7 +194,10 @@ class BrowserModel: NSObject{
                 return
             }
             
-            //ToDo: Need to update the lastTimeConnected when an item is already saved to CoreData. Hint should use, "peer" above to make update
+            //Update the lastTimeConnected when an item is already saved to CoreData.
+            peer.lastConnected = MPCChatUtility.getCurrentTime()
+            
+            
             print("Found saved peer - \(peer.peerName), with uuid value - \(peerUUID). Updated lastSeen information")
             completion(peer)
             
@@ -227,7 +230,7 @@ class BrowserModel: NSObject{
                 completion(nil)
                 return
             }
-            
+                    
             findRooms(self.thisPeer, withPeer: peer, completion: {
                 (roomsFound) -> Void in
                 
@@ -360,9 +363,13 @@ class BrowserModel: NSObject{
                 return
             }
             
-            oldRoom.name = roomName //ToDo: Saves room name if sender has changed it. Fix this to check to make sure the person changing the room name is the owner
-            oldRoom.addToPeers(self.thisPeer)
             
+            //This tests to ensure that the peer has the same name as the owner of the room.
+            if thisPeer.peerName == ownerName{
+                oldRoom.name = roomName
+                oldRoom.addToPeers(self.thisPeer)
+            }
+                
             BrowserModel.findPeers([ownerUUID], completion: {
                 (peersFound) -> Void in
                 
